@@ -23,7 +23,6 @@ const CreateComment = ({ post }: { post: Post }) => {
     try {
       const comment = await addComment(postData);
       setComment("");
-      console.log(comment);
     } catch (error) {
       console.log(error);
     }

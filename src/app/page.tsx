@@ -8,21 +8,9 @@ export default async function Home() {
   return (
     <Box bg="#f5f5f5" minH="100vh">
       <Center>
-        <VStack
-          w="500px"
-          spacing="4"
-          bg="#ffffff"
-          p={4}
-          divider={<StackDivider borderColor="gray.200" />}
-        >
+        <VStack w="500px" spacing="4" bg="#f5f5f5" p={4}>
           <UploadCard />
-          <VStack
-            divider={<StackDivider borderColor="gray.200" />}
-            spacing="4"
-            align="stretch"
-            w="100%"
-            p={4}
-          >
+          <VStack spacing="4" align="stretch" w="100%">
             {posts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}

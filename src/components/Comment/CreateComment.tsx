@@ -1,27 +1,31 @@
 "use client";
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import { Post } from "../../types/types";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { addComment } from "../../service/actions";
 
 const CreateComment = ({ post }: { post: Post }) => {
   const [comment, setComment] = useState("");
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
   };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    const postData = {
+    if (!comment || !comment.trim()) {
+      return;
+    }
+
+    const commentData = {
       content: comment,
       postId: post.id,
     };
 
     try {
-      const comment = await addComment(postData);
+      await addComment(commentData);
       setComment("");
     } catch (error) {
       console.log(error);
@@ -36,8 +40,10 @@ const CreateComment = ({ post }: { post: Post }) => {
           value={comment}
           onChange={handleInputChange}
         />
-        <InputRightElement onClick={handleSubmit}>
-          <PlusSquareIcon color="green.500" />
+        <InputRightElement>
+          <button type="submit" aria-label="submit">
+            <PlusSquareIcon color={"green.500"} />
+          </button>
         </InputRightElement>
       </InputGroup>
     </form>

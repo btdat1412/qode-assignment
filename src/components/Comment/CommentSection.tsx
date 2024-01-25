@@ -3,8 +3,9 @@
 import { VStack } from "@chakra-ui/react";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
+import { Post } from "../../types/types";
 
-const CommentSection = () => {
+const CommentSection = ({ post }: { post: Post }) => {
   return (
     <VStack align="stretch" w="100%" spacing={3}>
       <VStack
@@ -14,13 +15,11 @@ const CommentSection = () => {
         maxH="200"
         overflowY="scroll"
       >
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
+        {post.comment.map((comment) => (
+          <Comment key={comment.id} comment={comment} />
+        ))}
       </VStack>
-      <CreateComment />
+      <CreateComment post = {post}/>
     </VStack>
   );
 };

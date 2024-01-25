@@ -1,8 +1,10 @@
-import { Box, Center, Stack, StackDivider, VStack } from "@chakra-ui/react";
+import { Box, Center, StackDivider, VStack } from "@chakra-ui/react";
 import UploadCard from "../components/UploadCard/UploadCard";
 import PostCard from "../components/Post/PostCard";
+import { getPosts } from "../service/actions";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getPosts();
   return (
     <Box bg="#f5f5f5" minH="100vh">
       <Center>
@@ -21,11 +23,9 @@ export default function Home() {
             w="100%"
             p={4}
           >
-            <PostCard />
-            <PostCard />
-            <PostCard />
-            <PostCard />
-            <PostCard />
+            {posts.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))}
           </VStack>
         </VStack>
       </Center>

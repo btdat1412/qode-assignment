@@ -149,7 +149,7 @@ const UploadCard = () => {
           <Textarea
             value={title}
             onChange={handleInputChange}
-            placeholder="Here is a sample placeholder"
+            placeholder="Input your title here..."
             size="sm"
           />
           <Input
